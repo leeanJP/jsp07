@@ -10,9 +10,10 @@
 <body>
 <%
     String loginId = CookieManager.readCookie(request, "loginId");
+    String loginPw = CookieManager.readCookie(request, "loginPw");
 
     String cookieCheck = "";
-    if(!loginId.equals("")) {
+    if(!loginId.equals("") && !loginPw.equals("")) {
         cookieCheck = "checked";
     }
 %>
@@ -24,8 +25,7 @@
             <label><input type="checkbox" name="save_check" value="Y" <%= cookieCheck %> />로그인 유지하기</label>
         </p>
         <p>
-            <label>패스워드 : <input type="password" name="user_pw" /></label>
-            <label><input type="checkbox" name="save_check" value="Y" <%= cookieCheck %> /> 비밀번호 유지하기</label>
+            <label>패스워드 : <input type="password" name="user_pw" value="<%=loginPw %>"/></label>
         </p>
         <p>
             <input type="submit" value="로그인하기" />

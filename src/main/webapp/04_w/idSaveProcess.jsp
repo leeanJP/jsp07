@@ -17,13 +17,15 @@
     if(save_check != null && save_check.equals("Y")) {
       // 쿠키 생성 시 유지 시간은 24시간(86400초)
       CookieManager.makeCookie(response, "loginId", user_id, 86400);
+      CookieManager.makeCookie(response, "loginPw", user_pw, 86400);
     } else {
       // 체크가 되지 않은 경우 쿠키 삭제
       CookieManager.deleteCookie(response, "loginId");
+      CookieManager.deleteCookie(response, "loginPw");
     }
-    
+
     // 로그인 성공
-    JSFunction.alertLocation("로그인에 성공했습니다.", "idSaveMain.jsp", out);
+    JSFunction.alertLocation("로그인에 성공했습니다.", "idSuccessLogin.jsp", out);
   } else {
     // 로그인 실패
     JSFunction.alertBack("로그인에 실패했습니다.", out);
