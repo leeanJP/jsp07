@@ -13,8 +13,9 @@ public class MemberDAO extends DBConnPool {
     public MemberDTO getMemberDTO(String uid , String upass){
         MemberDTO dto = new MemberDTO();
         String sql = "SELECT id, pass, name, regidate FROM scott.member " +
-                "WHERE id =? AND pass =? ";
+                " WHERE id =? AND pass =? ";
 
+        //selet id, pass, name, regidate FROM scott.member WHERE id =? AND pass =?
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, uid);
