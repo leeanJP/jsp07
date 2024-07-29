@@ -1,0 +1,17 @@
+세션
+유저가 브라우저를 통해 접속하고 작업을 한뒤에 웹 브라우저를 닫아서 접속을 종료할 때까지를
+하나의 세션이라고 한다.
+
+세션 설정
+유지 시간 설정
+1. web.xml에서 session-config (분 단위) 로 설정하는 방법
+2. JSP 파일에서 setMaxInactiveInterval()  (초 단위)
+
+DTO 와 DAO
+
+DTO (Data Transfer Object) 계층 사이에서 데이터를 교환하기 위해 생성되는 객체
+별다른 로직이 없고 속성(멤벼 변수) 그 변수에 접근하기 위한 게터/세터 메서드만 가지고 있다.
+
+DAO (Data Access Object)
+DAO는 데이터 접근 객체 보통 JDBC를 통해 구현하고, 하나의 테이블에서 수행할 수 있는
+CRUD를 전담한다.
