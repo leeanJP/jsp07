@@ -74,4 +74,30 @@ public class BoardDAO extends DBConnPool {
     }
 
 
+
+    //게시글 작성
+    public int insertWrite(BoardDTO dto){
+        int result = 0;
+
+        try {
+            String query ="INSERT INTO scott.board ( "
+                    + " num, title, content, id, visitcount) "
+                    + " VALUES ( "
+                    + " scott.seq_board_num.nextval, ?,?,?,0)";
+
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, dto.getTitle());
+            psmt.setString(2, dto.getContent());
+            psmt.setString(3, dto.getId());
+
+            result = psmt.executeUpdate();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("insertWrite 오류 발생");
+        }
+
+        return result;
+    }
+
 }
