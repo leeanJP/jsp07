@@ -100,4 +100,56 @@ public class BoardDAO extends DBConnPool {
         return result;
     }
 
+
+    //게시글 조회
+    public BoardDTO selectView(String num){
+        BoardDTO dto = new BoardDTO();
+
+        try {
+            String query = "SELECT B.* , M.name" +
+                    " FROM scott.board B" +
+                    " INNER JOIN scott.member M" +
+                    " ON B.id = M.id" +
+                    " WHERE num = ?" ;
+
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, num);
+
+            rs = psmt.executeQuery();
+
+            if(rs.next()){
+                dto.setNum(rs.getString("num"));
+                dto.setTitle(rs.getString("title"));
+                dto.setContent(rs.getString("content"));
+                dto.setId(rs.getString("id"));
+                dto.setPostdate(rs.getDate("postdate"));
+                dto.setVisitcount(rs.getString("visitcount"));
+                dto.setName(rs.getString("name"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("selectView 오류 발생");
+        }
+        return dto;
+    }
+
+
+    //조회수 증가
+    public void updateViewCount(String num){
+        //쿼리문
+        String query = "UPDATE scott.board"
+                + " SET visitcount = visitcount +1"
+                + " WHERE num = ?";
+        try {
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, num);
+            rs = psmt.executeQuery();
+            
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("updateViewCount 오류 발생");
+        }
+
+    }
+
 }
