@@ -1,8 +1,6 @@
-package com.example;
+package com.example.util;
 
 import jakarta.servlet.jsp.JspWriter;
-
-import java.io.IOException;
 
 public class JSFunction {
     // 메시지 알림창을 띄운 후 해당 URL로 이동

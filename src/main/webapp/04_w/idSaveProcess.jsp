@@ -1,5 +1,5 @@
-<%@ page import="com.example.JSFunction" %>
-<%@ page import="com.example.CookieManager" %>
+<%@ page import="com.example.util.JSFunction" %>
+<%@ page import="com.example.util.CookieManager" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
          pageEncoding="UTF-8"
 %>

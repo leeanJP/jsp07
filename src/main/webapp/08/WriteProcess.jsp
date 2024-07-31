@@ -1,6 +1,6 @@
 <%@ page import="com.example.board.BoardDTO" %>
 <%@ page import="com.example.board.BoardDAO" %>
-<%@ page import="com.example.JSFunction" %>
+<%@ page import="com.example.util.JSFunction" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
          pageEncoding="UTF-8"
 %>

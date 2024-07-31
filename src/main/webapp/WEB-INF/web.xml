@@ -30,6 +30,18 @@
         <session-timeout>20</session-timeout>
     </session-config>
 
+    <!-- 한 페이지에 출력할 게시물의 개수 -->
+    <context-param>
+        <param-name>POSTS_PER_PAGE</param-name>
+        <param-value>10</param-value>
+    </context-param>
+
+    <!-- 한 화면 블록에 출력할 페지이 번호의 개수-->
+    <context-param>
+        <param-name>PAGES_PER_BLOCK</param-name>
+        <param-value>5</param-value>
+    </context-param>
+
     <!--한글 인코딩용 필터 tomcat 9 버전 사용시 필요함-->
 <!--    <filter>-->
 <!--        <filter-name>SetCharEncoding</filter-name>-->

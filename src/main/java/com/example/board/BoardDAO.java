@@ -1,21 +1,29 @@
 package com.example.board;
 
 import com.example.common.DBConnPool;
+import com.example.database.SqlSessionManager;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class BoardDAO extends DBConnPool {
 
+//    SqlSessionManager manager = new SqlSessionManager();
+//    SqlSessionFactory factory;
     public BoardDAO() {
+//        factory =  manager.getFactory();
         super();
+
     }
 
     //검색 조건에 맞는 게시물 개수 반환
     public int selectCount(Map<String, Object> map){
+        // 1) SqlSession을 가지고 올 수 있는 SqlSessionFactory 생성
+
         int totalCount = 0;
+
+
 
         String query = "SELECT count(*) FROM scott.board";
         if(map.get("searchWord") != null){
@@ -39,7 +47,7 @@ public class BoardDAO extends DBConnPool {
     public List<BoardDTO> selectList(Map<String, Object>map){
         //쿼리 결과를 담을 변수
         List<BoardDTO> boardList = new ArrayList<>();
-
+        //쿼리문 수행객체 생성
         //쿼리문 작성
 
         String query = "SELECT num, title, content, id, postdate, visitcount" +
@@ -73,7 +81,54 @@ public class BoardDAO extends DBConnPool {
         return boardList;
     }
 
+    //페이징 처리한 게시물 리스트
+    public List<BoardDTO> selectListPage(Map<String, Object> map){
+        List<BoardDTO> boardList = new ArrayList<>();
 
+        //쿼리문 작성
+        String query = "SELECT * "
+                + " FROM (SELECT tb.*, rownum rNum"
+                + " FROM (SELECT *"
+                + " FROM board";
+                if(map.get("searchWord") != null){
+                    query += " WHERE " + map.get("searchField") + " ";
+                    query += " LIKE '%" + map.get("searchWord") + "%'";
+                }
+                query += " ORDER BY num desc"
+                + " ) tb"
+                + " ) "
+                + "WHERE rNum BETWEEN ? AND ?";
+
+        try {
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, map.get("start").toString());
+            psmt.setString(2, map.get("end").toString());
+
+            System.out.println("start : " + map.get("start"));
+            System.out.println("end : " + map.get("end"));
+
+            rs = psmt.executeQuery();
+
+            while (rs.next()){
+                //한 row 의 내용을 DTO에 저장
+                BoardDTO dto = new BoardDTO();
+                dto.setNum(rs.getString("num"));
+                dto.setTitle(rs.getString("title"));
+                dto.setContent(rs.getString("content"));
+                dto.setId(rs.getString("id"));
+                dto.setPostdate(rs.getDate("postdate"));
+                dto.setVisitcount(rs.getString("visitcount"));
+                boardList.add(dto);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("페이징 처리 selectListPage 오류 발생");
+        }
+
+
+        return boardList;
+    }
 
     //게시글 작성
     public int insertWrite(BoardDTO dto){

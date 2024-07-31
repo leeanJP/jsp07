@@ -60,6 +60,21 @@
             <artifactId>jakarta.el-api</artifactId>
             <version>6.0.1</version>
         </dependency>
+<!--        &lt;!&ndash; MyBatis&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis</groupId>-->
+<!--            <artifactId>mybatis</artifactId>-->
+<!--            <version>3.5.16</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; lombok &ndash;&gt;-->
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.projectlombok/lombok &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--            <version>1.18.30</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+
 
 
 
