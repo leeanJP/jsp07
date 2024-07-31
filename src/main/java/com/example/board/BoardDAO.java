@@ -152,4 +152,49 @@ public class BoardDAO extends DBConnPool {
 
     }
 
+    //게시글 수정
+    public int updateEdit(BoardDTO dto){
+        int result = 0;
+
+        String query = "UPDATE scott.board"
+                + " SET title = ? , content = ? "
+                + " WHERE num = ?" ;
+
+        try {
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, dto.getTitle());
+            psmt.setString(2, dto.getContent());
+            psmt.setString(3, dto.getNum());
+
+            result = psmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("updateEdit 오류 발생");
+        }
+        return result;
+    }
+
+
+    //게시글 삭제
+    public int deletePost(BoardDTO dto){
+        int result = 0;
+
+        try {
+            String query = "DELETE FROM scott.board" +
+                    " WHERE num = ?";
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1,dto.getNum());
+
+            result = psmt.executeUpdate();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("deletePost 오류 발생");
+        }
+
+        return result;
+    }
+
+
+
 }

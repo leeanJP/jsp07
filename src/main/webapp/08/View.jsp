@@ -20,6 +20,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원제 게시판</title>
+
 </head>
 <body>
     <jsp:include page="../common/Link.jsp"></jsp:include>
@@ -66,4 +67,18 @@
 
     </form>
     </body>
+
+    <script>
+        function deletePost() {
+            var confirmed = confirm("정말로 삭제하시겠습니까?");
+            if(confirmed){
+                var form = document.writeFrm;
+                form.method = "post";
+                form.action = "DeleteProcess.jsp";
+                form.submit();
+
+
+            }
+        }
+    </script>
 </html>
