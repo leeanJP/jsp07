@@ -67,7 +67,15 @@
             <artifactId>jakarta.el-api</artifactId>
             <version>6.0.1</version>
         </dependency>
-<!--        &lt;!&ndash; MyBatis&ndash;&gt;-->
+
+        <!-- Xpath xml문서 노드 식별 및 탐색-->
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+
+        <!--        &lt;!&ndash; MyBatis&ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>org.mybatis</groupId>-->
 <!--            <artifactId>mybatis</artifactId>-->
