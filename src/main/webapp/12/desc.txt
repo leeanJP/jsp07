@@ -1,0 +1,26 @@
+Servlet 서블릿은 자바로 웹 애플리케이션을 개발할 수 있도록 만든 기술
+
+서버단에서 클라이언트 요청을 받아 처리한 후 응답을 하는 역할
+MVC 모델에서 Controller 역할
+모든 메소드는 스레드로 동작
+jakarta.servlet.http.HttpServlet 을 상속 받는다.
+
+서블릿의 역할
+통신 지원 : 클라이언트와 통신하려면 특정 포트로 소켓Socket 을 열고 I/O 스트림을 생성하는 등의 복잡한 과정이
+필요한데 , 서블릿 컨테이너는 이 과정을 간단하게 해주는 API 제공
+수명주기 관리 : 서블릿을 인스턴스화 한 후 초기화하고 , 요청에 맞는 메소드를 호출한다.
+응답 후 가비지 컬렉션을 통해 객체를 소멸시킨다.
+멀테스레딩 관리 : 서블릿 요청들은 스레드를 생성해 처리함.
+멀티스레드 방식으로 여러 요청들을 동시에 처리할 수 있다.
+
+
+서블릿 작성 규칙
+1. jakarta.servlet, jakarta.servlet.http , java.io 패키지를 import 해야함
+2. 서블릿 클래스는 반드시 public 선언 ,  HttpServlet 상속 받아야함
+3. 요청을 처리하기 위해서 doGet() doPost() 메소드를 오버라이딩 해야함
+4. doGet() doPost() 메소드는 ServletException , IOException 예외를 처리하도록 throws 해줘야한다.
+
+
+서블릿 매핑
+1.web.xml에서 매핑
+2.@WebServlet Annotation 으로 매핑

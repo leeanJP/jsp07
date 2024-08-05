@@ -42,6 +42,26 @@
         <param-value>5</param-value>
     </context-param>
 
+    <!--servlet 기본 형식-->
+    <!--서블릿 등록-->
+<!--    <servlet>-->
+<!--        <servlet-name>서블릿명</servlet-name>-->
+<!--        <servlet-class>패키지를 포함한 서블릿 클래스명</servlet-class>-->
+<!--    </servlet>-->
+    <!--서블릿과 요청명을 매핑-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>서블릿명</servlet-name>-->
+<!--        <url-pattern>요청 URL</url-pattern>-->
+<!--    </servlet-mapping>-->
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>com.example.servlet.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/12/HelloServlet.do</url-pattern>
+    </servlet-mapping>
+
     <!--한글 인코딩용 필터 tomcat 9 버전 사용시 필요함-->
 <!--    <filter>-->
 <!--        <filter-name>SetCharEncoding</filter-name>-->
