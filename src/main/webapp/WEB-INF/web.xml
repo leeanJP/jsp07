@@ -61,6 +61,14 @@
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/12/HelloServlet.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DirectServletPrint</servlet-name>
+        <servlet-class>com.example.servlet.DirectServletPrint</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DirectServletPrint</servlet-name>
+        <url-pattern>/12/DirectServletPrint.do</url-pattern>
+    </servlet-mapping>
 
     <!--한글 인코딩용 필터 tomcat 9 버전 사용시 필요함-->
 <!--    <filter>-->
