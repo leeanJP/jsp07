@@ -6,6 +6,8 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FileUtil {
     /*
@@ -42,4 +44,27 @@ public class FileUtil {
         return originalFileName;
     }
 
+
+    //파일명 변경
+    public static String renameFile(String sDir, String fileName){
+        //확장자 잘라내기
+        //temp.png
+
+        String ext = fileName.substring(fileName.lastIndexOf("."));
+
+        //날짜_시간.확장자 새로운 파일명 생성
+        String now = new SimpleDateFormat("yyyyMMdd_HmsS")
+                .format(new Date());
+        String newFileName = now + ext;
+        //20240806_101220.png
+
+        //기존 파일명을 새 파일명으로 변경
+        File oldFile = new File(sDir + File.separator+fileName);
+        File newFile = new File(sDir + File.separator+newFileName);
+
+        oldFile.renameTo(newFile);
+
+        return newFileName;
+
+    }
 }
