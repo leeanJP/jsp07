@@ -13,6 +13,7 @@
 <body>
     <h2>DB에 등록된 파일 목록 보기</h2>
     <a href="FileUploadMain.jsp">파일 등록</a>
+    <a href="MultiUploadMain.jsp">다중파일 등록</a>
 
     <%
         MyFileDAO dao = new MyFileDAO();

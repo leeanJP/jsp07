@@ -1,6 +1,5 @@
 package com.example.fileupload;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,39 +8,41 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-@WebServlet("/13/UploadProcess.do")
-@MultipartConfig (
-        maxFileSize = 1024 * 1024 * 1,    //1MB
-        maxRequestSize = 1024 * 1024 * 10  //10MB
+@WebServlet("/13/MultipleProcess.do")
+@MultipartConfig(
+        maxFileSize = 1024 * 1024 * 5,    //5MB
+        maxRequestSize = 1024 * 1024 * 50  //50MB
 )
-public class UploadProcess extends HttpServlet {
-
+public class MultipleProcess extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
         try {
             //드라이브 명으로 절대경로 지정하기
             String saveDirectory = getServletContext().getRealPath("/upload");
-            System.out.println("servlet Context : " + getServletContext().getRealPath("/upload"));
+            System.out.println("저장경로 확인: " + saveDirectory);
 
+            //다중 파일 업로드
+            ArrayList<String> listFileName = FileUtil.multipleFile(req, saveDirectory);
 
-            //파일 업로드
-            String originalFileName = FileUtil.uploadFile(req,saveDirectory);
+            for( String originalFileName : listFileName){
+                //저장된 파일명 변경
+                String savedFileName = FileUtil.renameFile(saveDirectory, originalFileName);
 
-            //저장된 파일명 변경
-            String savedFileName = FileUtil.renameFile(saveDirectory, originalFileName);
+                //DB 저장
+                insertFile(req, originalFileName, savedFileName);
+            }
 
-            //DB에 저장
-            insertFile(req, originalFileName, savedFileName);
-
-            //파일 목록 페이지로 이동
             resp.sendRedirect("FileList.jsp");
 
 
-        }catch (Exception e){
+        }catch  (Exception e){
             e.printStackTrace();
-            req.setAttribute("errMessage" , "파일 업로드 오류");
-            req.getRequestDispatcher("FileUploadMain.jsp").forward(req,resp);
+            req.setAttribute("errMessage" , "멀티파일 업로드 오류");
+            req.getRequestDispatcher("MultipleUploadMain.jsp").forward(req,resp);
         }
     }
 
