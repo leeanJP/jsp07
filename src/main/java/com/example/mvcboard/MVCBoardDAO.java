@@ -111,4 +111,51 @@ public class MVCBoardDAO extends DBConnPool {
         return result;
     }
 
+    //게시글 상세보기
+    public MVCBoardDTO selectView(String idx){
+        MVCBoardDTO dto = new MVCBoardDTO();
+        String query = "SELECT * FROM scott.mvcboard WHERE idx = ?";
+        try {
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, idx);
+            rs = psmt.executeQuery();
+
+            if(rs.next()){
+                dto.setIdx(rs.getString("idx"));
+                dto.setName(rs.getString("name"));
+                dto.setTitle(rs.getString("title"));
+                dto.setContent(rs.getString("content"));
+                dto.setPostdate(rs.getDate("postdate"));
+                dto.setOfile(rs.getString("ofile"));
+                dto.setSfile(rs.getString("sfile"));
+                dto.setDowncount(rs.getInt("downcount"));
+                dto.setPass(rs.getString("pass"));
+                dto.setVisitcount(rs.getInt("visitcount"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("MVCboard selectView 오류발생");
+        }
+
+        return dto;
+
+    }
+
+
+    public void updateVisitCount(String idx){
+        //쿼리문
+        String query = "UPDATE scott.mvcboard"
+                + " SET visitcount = visitcount +1"
+                + " WHERE idx = ?";
+        try {
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, idx);
+            rs = psmt.executeQuery();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("mvcboard updateVisitCount 오류 발생");
+        }
+    }
+
 }
