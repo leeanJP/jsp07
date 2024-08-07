@@ -83,5 +83,32 @@ public class MVCBoardDAO extends DBConnPool {
         return boardList;
     }
 
+    //게시글 작성
+    public int insertWrite(MVCBoardDTO dto) {
+        int result = 0;
+
+        try {
+            String query ="INSERT INTO scott.mvcboard ( "
+                    + " idx, name,title, content, ofile,sfile, pass) "
+                    + " VALUES ( "
+                    + " scott.seq_board_num.nextval, ?,?,?,?,?,?)";
+
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, dto.getName());
+            psmt.setString(2, dto.getTitle());
+            psmt.setString(3, dto.getContent());
+            psmt.setString(4, dto.getOfile());
+            psmt.setString(5, dto.getSfile());
+            psmt.setString(6, dto.getPass());
+
+            result = psmt.executeUpdate();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("mvcboard insertWrite 오류 발생");
+        }
+
+        return result;
+    }
 
 }

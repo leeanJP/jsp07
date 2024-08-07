@@ -58,6 +58,7 @@ public class ListController extends HttpServlet {
 
         //게시물 목록 가져오기
         List<MVCBoardDTO> boardList = dao.selectListPage(map);
+        dao.close();
         //뷰에 전달할 매개변수 추가
         String pagingImg =
                 BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum,
