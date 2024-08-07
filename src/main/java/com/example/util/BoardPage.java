@@ -9,7 +9,6 @@ public class BoardPage {
         int totalPage = (int) Math.ceil((double) totalCount/pageSize);
 
         int pageTemp = (((pageNum - 1) / blockPage) * blockPage) + 1;
-
         //이전 페이지 블록 바로가기
         if(pageTemp != 1){
             pagingStr += " <a href='" + reqUrl + "?pageNum=1'>[첫 페이지]</a>";
@@ -31,7 +30,6 @@ public class BoardPage {
             blockCount++;
 
         }
-
 
         //다음 페이지 블록 바로가기
         if(pageTemp <= totalPage){
