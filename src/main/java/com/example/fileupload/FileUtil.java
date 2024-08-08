@@ -158,5 +158,14 @@ public class FileUtil {
 
     }
 
+    //파일 삭제
+    public static void deleteFile(HttpServletRequest req, String dir , String fileName){
+        String sDir = req.getServletContext().getRealPath(dir);
+        File file = new File(sDir + File.separator + fileName);
+        if(file.exists()){
+            file.delete();
+        }
+    }
+
 
 }

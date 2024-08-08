@@ -175,5 +175,84 @@ public class MVCBoardDAO extends DBConnPool {
 
     }
 
+    //입력한 비밀번호가 지정한 idx 게시물의 비밀번호와 일치하는지 여부 확인
+    public boolean confirmPassword(String pass, String idx){
+        boolean isCorr = false;
 
+        try {
+            String query = "SELECT COUNT(*) FROM scott.mvcboard"
+                    + " WHERE pass = ? AND idx = ?";
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, pass);
+            psmt.setString(2, idx);
+            rs = psmt.executeQuery();
+
+            rs.next();
+            if(!(rs.getInt(1) == 0)){
+                isCorr = true;
+            }
+
+        }catch (Exception e){
+            isCorr = false;
+            System.out.println("confirmPassword 오류 발생");
+            e.printStackTrace();
+        }
+
+        return isCorr;
+    }
+
+    //게시글 수정
+    public int updatePost(MVCBoardDTO dto){
+        int result = 0;
+
+
+        try {
+            String query = "UPDATE scott.mvcboard"
+                    + " SET title =? , name = ? , content = ?,"
+                    + " ofile = ? , sfile = ?"
+                    + " WHERE idx = ? AND PASS =?";
+            System.out.println("쿼리 파라메터 확인");
+            System.out.println("========");
+            System.out.println(dto.getTitle());
+            System.out.println(dto.getOfile());
+            System.out.println(dto.getSfile());
+            System.out.println(dto.getIdx());
+            System.out.println(dto.getPass());
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1,dto.getTitle());
+            psmt.setString(2,dto.getName());
+            psmt.setString(3,dto.getContent());
+            psmt.setString(4,dto.getOfile());
+            psmt.setString(5,dto.getSfile());
+            psmt.setString(6,dto.getIdx());
+            psmt.setString(7,dto.getPass());
+
+            result = psmt.executeUpdate();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("updatePost 오류 발생");
+        }
+
+
+        return result;
+    }
+
+    //게시글 삭제
+    public int deletePost(String idx){
+        int result = 0;
+        try {
+            String query = "DELETE FROM scott.mvcboard WHERE idx = ?";
+
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1,idx);
+            result = psmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("deletePost 오류 발생");
+        }
+
+
+        return result;
+    }
 }
