@@ -158,4 +158,22 @@ public class MVCBoardDAO extends DBConnPool {
         }
     }
 
+
+    //다운로드 횟수 증가
+    public void updateDownCount(String idx) {
+        String query = "UPDATE scott.mvcboard SET "
+                + " downcount = downcount + 1 "
+                + " WHERE idx = ?";
+        try {
+            psmt = conn.prepareStatement(query);
+            psmt.setString(1, idx);
+            psmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("updateDownCount 오류 발생");
+        }
+
+    }
+
+
 }
