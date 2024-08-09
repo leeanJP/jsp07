@@ -83,6 +83,37 @@
         <url-pattern>/12/MemberAuth.mvc</url-pattern>
     </servlet-mapping>
 
+<!--필터의 기본형태-->
+<!--    <filter>-->
+<!--        <filter-name>필터명</filter-name>-->
+<!--        <filter-class>패키지를 포함한 필터 클래스명</filter-class>-->
+<!--        <init-param>-->
+<!--            <param-name>초기화 매개변수 명</param-name>-->
+<!--            <param-value>초기화 매개변수 값</param-value>-->
+<!--        </init-param>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>필터명</filter-name>-->
+<!--        <url-pattern>필터를 적용할 요청명</url-pattern>-->
+<!--    </filter-mapping>-->
+
+    <filter>
+        <filter-name>BasicFilter</filter-name>
+        <filter-class>com.example.filter.BasicFilter</filter-class>
+        <init-param>
+            <param-name>FILTER_INIT_PARAM</param-name>
+            <param-value>필터 초기화 매개변수</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>BasicFilter</filter-name>
+        <url-pattern>/15/BasicFilter.jsp</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>com.example.listener.ContextListener</listener-class>
+    </listener>
     <!--한글 인코딩용 필터 tomcat 9 버전 사용시 필요함-->
 <!--    <filter>-->
 <!--        <filter-name>SetCharEncoding</filter-name>-->
