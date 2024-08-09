@@ -6,19 +6,25 @@ import jakarta.servlet.ServletContextListener;
 import java.util.Enumeration;
 
 public class ContextListener implements ServletContextListener {
-    //웹 애플리케이션 시작이베튼를 감지
+    //웹 애플리케이션 시작,종료 이벤트를 감지
     @Override
     public void contextInitialized(ServletContextEvent sce) {
 
         Enumeration<String> apps = sce.getServletContext().getInitParameterNames();
 
         while (apps.hasMoreElements()) {
-            
+            System.out.println("[리스너] 컨텍스트 초기화 매개변수 생성 : "
+            + apps.nextElement());
         }
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        ServletContextListener.super.contextDestroyed(sce);
+        Enumeration<String> apps = sce.getServletContext().getInitParameterNames();
+
+        while (apps.hasMoreElements()) {
+            System.out.println("[리스너] 컨텍스트 초기화 매개변수 소멸 : "
+                    + apps.nextElement());
+        }
     }
 }
